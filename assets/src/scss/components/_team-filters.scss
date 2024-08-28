@@ -1,0 +1,109 @@
+.team-members__filters {
+  padding-bottom: 60px;
+  .facetwp-facet {
+    margin-bottom: 12px !important;
+    &:last-of-type {
+      margin: 0;
+    }
+    input,
+    select {
+      @include fs-static(16);
+      border: none;
+      border-radius: 24px;
+      font-family: $f-steradian-medium;
+      line-height: 20px;
+      min-height: 48px;
+      outline: none;
+      padding: 13px 20px;
+      transition: $default_transition;
+      width: 100%;
+    }
+    select {
+      appearance: none;
+      background: transparent;
+      background-color: $clr-malachite-deep;
+      background-image: url("data:image/svg+xml;utf8,<svg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 1L6.5 7L12 1' stroke='%23F4F0EF' stroke-width='1.5'/></svg>");
+      background-position: right 20px top 50%;
+      background-repeat: no-repeat;
+      color: $clr-pearl;
+      cursor: pointer;
+    }
+  }
+  .facetwp-type-search {
+    .facetwp-search {
+      border: 1px solid $clr-malachite-deep;
+      color: $clr-malachite-deep;
+
+      &::placeholder {
+        color: $clr-malachite-deep;
+        font-family: $f-steradian-medium;
+        opacity: 1;
+        transition: $default_transition;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        &::placeholder {
+          opacity: 0.8;
+        }
+      }
+    }
+    .facetwp-input-wrap {
+      width: 100%;
+    }
+    .facetwp-icon {
+      opacity: 1;
+      &::before {
+        background: url(../../../assets/img/icon-arrow-right.svg) no-repeat;
+        background-position: right 20px top 50%;
+        width: 50px;
+      }
+      &.f-loading {
+        &::before {
+          animation: none !important;
+        }
+      }
+    }
+  }
+  @include respond-min($bp-tablet-wide-med-min) {
+    display: flex;
+    max-width: 1060px;
+    padding-bottom: 80px;
+    div {
+      flex: 1 1 auto;
+      width: 305px;
+      &:nth-child(2) {
+        margin: 0 20px;
+      }
+      &:last-child {
+        width: 410px;
+      }
+    }
+
+    input {
+      &:hover,
+      &:focus,
+      &:active {
+      }
+    }
+    select {
+      &:hover,
+      &:focus,
+      &:active {
+        animation: animate-chevron-down 0.7s;
+        @keyframes animate-chevron-down {
+          0% {
+            background-position: right 20px top 50%;
+          }
+          50% {
+            background-position: right 20px top 60%;
+          }
+          to {
+            background-position: right 20px top 50%;
+          }
+        }
+      }
+    }
+  }
+}

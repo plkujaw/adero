@@ -1,0 +1,68 @@
+.accordion {
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(95.12deg, #f6921e 0%, #f26f21 100%) border-box;
+  border: 1px solid transparent;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  padding: 20px 0;
+
+  &__summary-inner {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    .accordion-title {
+      h3 {
+        @include fs-responsive($fs-p1);
+        font-family: $f-epilogue;
+        font-weight: 700;
+      }
+    }
+
+    .accordion-control {
+      align-items: flex-start;
+      cursor: pointer;
+      display: flex;
+      height: 20px;
+      justify-content: center;
+      margin-left: 2vw;
+      margin-top: 0.3em;
+      width: 25px;
+
+      &__icon {
+        border-right: 2px solid $clr-malachite-deep;
+        border-top: 2px solid $clr-malachite-deep;
+        border-width: 2px;
+        display: block;
+        height: 11px;
+        transform: rotate(135deg);
+        transition: $default_transition;
+        width: 11px;
+      }
+    }
+  }
+  &__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: $default_transition;
+    p {
+      padding-top: 20px;
+    }
+  }
+  &--open {
+    .accordion-control {
+      &__icon {
+        transform: rotate(-45deg) translate(-5px, 5px);
+      }
+    }
+  }
+  @include respond-min($bp-tablet-wide-med-min) {
+    padding: 32px 0;
+    &__content {
+      p {
+        padding-right: 32px;
+        padding-top: 32px;
+      }
+    }
+  }
+}

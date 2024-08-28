@@ -1,0 +1,331 @@
+@import 'core/animations';
+/*
+  TYPOGRAPHY
+*/
+
+// Required: these font-breakpoint maps need to match the respond-min value of each grid setup in _grid.scss
+$typography-breakpoints: (
+  g: 0,
+  // g-col
+    gw: $bp-tablet-min,
+  // gw-col
+    gt: $bp-tablet-lrg-min,
+  // gt-col
+    gtw: $bp-tablet-wide-min,
+  gtm: $bp-tablet-wide-med-min,
+  // gtw-col
+    gd: $bp-desktop-min,
+  // gd-col
+    gdm: $bp-desktop-wide-min,
+  // gdm-col
+);
+
+// FONT SIZES
+$fs-h1: (
+  g: 52,
+  gtm: 92
+);
+$fs-h2: (
+  g: 30,
+  gtm: 35
+);
+$fs-h3: (
+  g: 20,
+  gtm: 24
+);
+$fs-h4: (
+  g: 32,
+  gtm: 48
+);
+$fs-h5: (
+  g: 32,
+  gtm: 60
+);
+$fs-h6: (
+  g: 13,
+  gtm: 14
+);
+// $fs-bq: ( g : 28, gtw : 36, gd : 40 );
+$fs-p1: (
+  g: 16
+);
+
+$fs-p2: (
+  g: 13
+);
+$fs-p3: (
+  g: 12
+);
+
+$fs-page-intro: (
+  g: 24,
+  gtm: 48
+);
+
+$fs-team-member-card-name: (
+  g: 16,
+  gtm: 17
+);
+
+$fs-team-members-filter-selections: (
+  g: 15,
+  gtm: 20
+);
+
+$fs-spotlight-questionnaire: (
+  g: 16,
+  gtm: 22
+);
+
+$fs-link-block: (
+  g: 32,
+  gtm: 92
+);
+
+$fs-main-nav: (
+  g: 24,
+  gtm: 13
+);
+
+$fs-resources-name: (
+  g: 20,
+  gtm: 24
+);
+
+$fs-work-card-number: (
+  g: 20,
+  gtm: 32
+);
+
+$fs-work-card-title: (
+  g: 15,
+  gtm: 16
+);
+
+$fs-work-card-subtitle: (
+  g: 28,
+  gtm: 48
+);
+
+$fs-work-diagram-card-title: (
+  g: 11,
+  gtm: 13
+);
+
+$fs-form-selections: (
+  g: 20,
+  gtm: 22
+);
+
+$fs-location-name: (
+  g: 16,
+  gtm: 18
+);
+
+$fs-error404: (
+  g: 180,
+  gtm: 400
+);
+
+$fs-cookie-bar: (
+  g: 12,
+  gtm: 13
+);
+
+// MIXINS
+@mixin fs-static($size_in_px) {
+  @include respond-min(0) {
+    font-size: #{$size_in_px}px;
+    font-size: #{calculate-rem($size_in_px)}rem;
+  }
+}
+
+@mixin fs-responsive($fs-map, $fs-breakpoints: $typography-breakpoints) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      font-size: $fs-font-size;
+    } @else {
+      // If $fs-font-size is a key that exists in
+      // $fs-breakpoints, use the value
+      @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+        $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+      }
+      @include respond-min($fs-breakpoint) {
+        font-size: #{$fs-font-size}px;
+        font-size: #{calculate-rem($fs-font-size)}rem;
+      }
+    }
+  }
+}
+
+// Line height (unitless preferred)
+$lh: (
+  expanded: 1.75,
+  base: 1.5,
+  tighter: 1.35,
+  condensed: 1.25,
+  compressed: 1.15,
+  crushed: 1,
+  smashed: 0.9,
+  negative: 0.75
+);
+
+// Helper for line heights
+@mixin lh($key) {
+  @if map-has-key($lh, $key) {
+    line-height: map-get($lh, $key);
+  } @else {
+    @warn "Unknown '#{$key}' in map $lh.";
+  }
+}
+
+// Letter Spacing
+$ls-stretched: 0.2em;
+$ls-wide: 0.05em;
+$ls-med-wide: 0.02em;
+$ls-tightish: -0.02em;
+$ls-tighter: -0.03em;
+$ls-narrow: -0.05em;
+
+// Typographical defaults
+body {
+  color: $clr-malachite-deep;
+  font-family: $f-epilogue;
+  font-size: 62.5%; // sets default to 10px for using with REM units
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility; // aestheticallyloyal.com/public/optimize-legibility/
+  -webkit-text-size-adjust: 100%; // Prevents iOS orientation font resize bug
+  word-wrap: break-word;
+}
+
+* {
+  font-weight: normal;
+  letter-spacing: 0.01em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $f-steradian-bold;
+  line-height: 100%;
+  // font-weight: bold;
+  margin: 0 0 1em 0;
+  &:last-of-type {
+    margin: 0;
+  }
+  @include respond-min($bp-desktop-min) {
+    // margin: 0 0 50px 0;
+  }
+}
+
+h1,
+.fs-h1 {
+  @include fs-responsive($fs-h1);
+  line-height: 104%;
+}
+
+h2,
+.fs-h2 {
+  @include fs-responsive($fs-h2);
+}
+
+h3,
+.fs-h3 {
+  @include fs-responsive($fs-h3);
+  line-height: 170%;
+  @include respond-min($bp-tablet-wide-med-min) {
+    line-height: 147%;
+  }
+}
+
+// h4, .fs-h4 {
+//   @include fs-responsive($fs-h4);
+// }
+
+// h5, .fs-h5 {
+//   @include fs-responsive($fs-h5);
+// }
+
+// h6, .fs-h6 {
+//   @include fs-responsive($fs-h6);
+// }
+
+p,
+.fs-p1 {
+  @include fs-responsive($fs-p1);
+  line-height: 162%;
+  margin: 0 0 1em 0;
+  &:last-of-type {
+    margin: 0;
+  }
+}
+
+.fs-p2 * {
+  @include fs-responsive($fs-p2);
+  line-height: 150%;
+}
+
+.fs-p3 {
+  @include fs-responsive($fs-p3);
+  line-height: 200%;
+}
+
+strong,
+b {
+  font-weight: bold;
+}
+
+small,
+.small {
+  font-size: 13px !important;
+}
+
+// blockquote,
+// .blockquote {
+//   @include fs-responsive($fs-bq);
+//   @include lh(compressed);
+//   letter-spacing: $ls-narrow;
+// }
+
+ol,
+ul {
+  // @include fs-responsive($fs-p1);
+  // margin-top: 1em;
+  // padding-left: 1em;
+
+  li {
+    @include fs-responsive($fs-p1);
+  }
+}
+
+.border-link {
+  border: 1px solid;
+  padding: 0.5em 1em;
+
+  @include respond-min($bp-tablet-wide-min) {
+    padding: 0.5em 0.75em;
+  }
+}
+
+a,
+.wysiwyg a {
+  position: relative;
+  text-decoration: none;
+  text-underline-offset: 2px;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.wysiwyg {
+  a {
+    text-decoration: underline;
+    color: inherit;
+  }
+}

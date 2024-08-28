@@ -1,0 +1,115 @@
+/*
+  FOOTER
+  Global footer
+*/
+
+.footer {
+  padding: 80px 0 32px;
+  ul {
+    @include list-reset;
+  }
+  a {
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+  
+  &__group-1 {
+    li,
+    a {
+      @include fs-responsive($fs-p1);
+      color: $clr-malachite-deep;
+      font-family: $f-steradian-regular;
+      line-height: 32px;
+    }
+    .footer__tagline {
+      margin: 0 0 48px 0;
+      max-width: 200px;
+    }
+    .footer__contact {
+      overflow-wrap: break-word;
+      padding: 28px 0;
+      word-break: break-all;
+      word-break: break-word;
+      word-wrap: break-word;
+    }
+  }
+
+  &__group-2 {
+    li,
+    a,
+    span {
+      @include fs-responsive($fs-p2);
+      color: $clr-gray;
+      line-height: 20px;
+    }
+    li,
+    a {
+      font-family: $f-steradian-regular;
+    }
+    .footer__logo {
+      max-width: 40px;
+      padding: 44px 0;
+    }
+    .footer__additional-links {
+      padding-bottom: 24px;
+      ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    padding: 200px 0 60px;
+
+    &__group {
+      display: flex;
+    }
+    &__group-1 {
+      margin-bottom: 60px;
+      div:nth-child(n + 2) {
+        padding-left: 7.5vw;
+      }
+      .footer__tagline {
+        margin: 0;
+        min-width: 340px;
+        width: 340px;
+      }
+
+      .footer__contact {
+        padding: 0;
+      }
+    }
+
+    &__group-2 {
+      align-items: flex-end;
+      .footer__logo {
+        margin-left: auto;
+        max-width: 44px;
+        order: 3;
+        padding: 0;
+      }
+      .footer__additional-links {
+        order: 2;
+        padding: 0 0 0 7.5vw;
+        ul {
+          display: flex;
+          li {
+            margin-right: 38px;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+      .footer__copyright {
+        line-height: 1;
+        min-width: 340px;
+        order: 1;
+      }
+    }
+  }
+}

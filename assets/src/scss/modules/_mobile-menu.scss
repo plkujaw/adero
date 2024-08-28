@@ -1,0 +1,60 @@
+.mobile-menu {
+  background-color: $clr-malachite-deep;
+  height: 100%;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  transform: translateY(-100%);
+  transition: $default_transition;
+  width: 100%;
+  z-index: 90;
+
+  a {
+    @include fs-responsive($fs-main-nav);
+    color: $clr-pearl;
+    font-family: $f-steradian-regular;
+    line-height: 34px;
+  }
+
+  &__nav {
+    padding: 100px 0 20px 0;
+    text-align: center;
+  }
+
+  &__login {
+    margin-top: 28px;
+    a {
+      @include fs-static(16);
+      align-items: baseline;
+      display: flex;
+      font-family: $f-steradian-light;
+      margin: 0 auto 16px auto;
+      width: fit-content;
+      svg {
+        margin-left: 0.5em;
+        width: 12px;
+        path {
+          fill: $clr-pearl;
+        }
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        svg {
+          animation: animate-arrow-1 0.7s;
+        }
+      }
+    }
+  }
+
+  &--open {
+    transform: translateY(0);
+  }
+  @include respond-min($bp-tablet-wide-med-min) {
+    display: none;
+  }
+}

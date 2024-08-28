@@ -1,0 +1,148 @@
+/*
+  ANIMATIONS
+  Custom animation mixins
+*/
+
+$default_transition: all 0.3s ease-in-out;
+$slow_transition: all 0.7s ease-in-out;
+
+@keyframes animate-line-scroll {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes reset-line-scroll {
+  0% {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes animate-arrow-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(3px, -3px);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes animate-arrow-2 {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-6px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes animate-arrow-3 {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes animate-chevron-right {
+  0% {
+    transform: rotate(45deg) translate(1px, -4px);
+  }
+  50% {
+    transform: rotate(45deg) translate(4px, -7px);
+  }
+  to {
+    transform: rotate(45deg) translate(1px, -4px);
+  }
+}
+
+@keyframes animate-chevron-left {
+  0% {
+    transform: rotate(-135deg) translate(-1px, 1px);
+  }
+  50% {
+    transform: rotate(-135deg) translate(2px, -2px);
+  }
+  to {
+    transform: rotate(-135deg) translate(-1px, 1px);
+  }
+}
+
+@keyframes play-btn {
+  0% {
+    right: -8px;
+  }
+  50% {
+    right: -12px;
+  }
+  to {
+    right: -8px;
+  }
+}
+
+.js-slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: $slow_transition;
+  &.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.js-rise-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: $slow_transition;
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.js-fade-in {
+  opacity: 0;
+  transition: $slow_transition;
+  &.active {
+    opacity: 1;
+  }
+}
+
+.js-sequence {
+  .info-card {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: $default_transition;
+    &:first-child::before {
+      opacity: 0;
+    }
+    &.active {
+      opacity: 1;
+      transform: translateX(0);
+      &:first-child::before {
+        opacity: 1;
+        transition: $default_transition;
+        transition-delay: 1.4s;
+      }
+    }
+  }
+}

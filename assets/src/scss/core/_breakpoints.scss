@@ -1,0 +1,51 @@
+/*
+  BREAKPOINTS & MEDIA QUERY HELPERS
+  Global breakpoints should always be in -min/-max pairs, with -min being 1px largely than its previous breakpoint
+  Then, use -min/-max breakpoints with corresponding respond-min/respond-max mixins
+*/
+
+// to calc ems (assuming base font size of 16):
+// fs-in-ems = (1 / 16) * desired-pixels
+// 321px in ems: (1 / 16px) * 321px = 20.0625em
+$bp-mobile-wide-min: 20.0625em; // 321px;
+$bp-tablet-min: 30.0625em; // 481px;
+$bp-tablet-med-min: 34.5em; // 552px;
+$bp-tablet-lrg-min: 40.0625em; // 641px;
+$bp-tablet-wide-min: 48.0625em; // 769px;
+$bp-tablet-wide-med-min: 60em; // 960px;
+$bp-desktop-min: 64.0625em; // 1025px;
+$bp-desktop-wide-min: 71.9375em; // 1151px;
+$bp-site-width-min: 90em; // 1440px;
+
+$site-width: 1440px;
+
+
+// Media query helpers
+@mixin respond-min($width) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin respond-max($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin respond-min-max($min-width, $max-width) {
+  @media screen and (min-width: $min-width) and (max-width: $max-width) {
+    @content;
+  }
+}
+
+// media query for retina devices
+// $width: pass in a min width (with units) to target specific size retina devices and up
+// 0 for all devices, 1300px for only big retina devices
+@mixin if-retina-min($width) {
+  @media only screen and (min-device-pixel-ratio: 2) and (min-width: $width),
+    only screen and (min-resolution: 192dpi) and (min-width: $width),
+    only screen and (min-resolution: 2dppx) and (min-width: $width) {
+    @content;
+  }
+}

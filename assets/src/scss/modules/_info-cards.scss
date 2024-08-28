@@ -1,0 +1,30 @@
+.info-cards {
+  &__wrapper {
+    // padding-bottom: 22px;
+  }
+  &__inner {
+    transform: translateY(-82px);
+  }
+  @include respond-min($bp-tablet-wide-med-min) {
+    &__wrapper {
+      padding-bottom: 56px;
+    }
+    &__inner {
+      display: flex;
+      transform: translateY(-100px);
+    }
+    &.our-services:not(.our-services--home) {
+      .info-card {
+        display: flex;
+        flex-direction: column;
+        height: unset;
+        &__additional-information {
+          margin-top: auto;
+        }
+      }
+    }
+  }
+  &--about {
+    background: $clr-btn-gradient;
+  }
+}

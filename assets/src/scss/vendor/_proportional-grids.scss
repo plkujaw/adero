@@ -1,0 +1,221 @@
+/*
+  GV PROPORTIONAL GRIDS
+  Based on http://builtbyboon.com/posed/Proportional-Grids/
+  Heavily modified...
+*/
+
+// DEFAULTS
+// Can be overridden by project-specific settings
+
+// this is the fixed gutter between columns
+$grid-gutter: 20px !default;
+
+// this sets your class names
+$grid-namespace: "grid" !default;
+$grid-wrap-class: "-wrap";
+$grid-col-class: "-col";
+
+// Columns
+// See _settings.scss for the full grid config - this file only ships with halves
+$grid-columns: full 1, 1-2 1/2 !default;
+
+// GRID MIXINS
+@mixin set-gutter($gutter, $namespace) {
+  margin-left: -$gutter;
+
+  > .g-col,
+  > [class*="g-col"] {
+    padding-left: $gutter;
+
+    .lt-ie8 & {
+      padding-left: $gutter;
+    }
+  }
+}
+
+@mixin grid-config($namespace,$gutter) {
+
+  .g-wrap {
+    margin-left: -$gutter; // the same as your gutter
+    clear: both;
+
+    &:after { // clearfix
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .lt-ie8 & {
+      margin-left: 0;
+    }
+  }
+
+  .#{$namespace}#{$grid-wrap-class}--inline {
+    font-size: 0; // kill inline-block whitespace
+  }
+
+  .#{$namespace}#{$grid-wrap-class}--flex {
+    display: inherit;
+
+    @include respond-min($bp-tablet-wide-min) {
+      display: flex;
+    }
+  }
+
+  .#{$namespace}#{$grid-wrap-class}--float {
+    display: block;
+  }
+
+  .large-gutter {
+    @include set-gutter($gutter * 1.5, $namespace);
+  }
+
+  .half-gutter {
+    @include set-gutter($gutter / 2, $namespace);
+  }
+
+  .third-gutter {
+    @include set-gutter($gutter / 3, $namespace);
+  }
+
+  .quarter-gutter {
+    @include set-gutter($gutter / 4, $namespace);
+  }
+
+  .no-gutter {
+    @include set-gutter(0, $namespace);
+  }
+
+  .reset-gutter {
+    @include set-gutter($gutter, $namespace);
+  }
+
+  .tiny-gutter {
+    @include set-gutter(2px, $namespace);
+  }
+
+  .g-col,
+  [class*="g-col"] {
+    padding-left: $gutter; // the gutter between columns
+
+    .lt-ie8 & {
+      padding-left: #{$gutter / 10px}#{"%"};
+    }
+
+    .#{$namespace}#{$grid-wrap-class}--inline & { // modifier for using inline-block instead of float
+      display: inline-block;
+      float: none;
+      vertical-align: top;
+      text-align: left; // override any inline-block alignment on wrap
+      font-size: #{$fs-base-px}px; // reinstate after kill inline-block whitespace
+      // @@TODO: better inline-block spacing hack? http://davidwalsh.name/remove-whitespace-inline-block
+    }
+
+    .#{$namespace}#{$grid-wrap-class}--flex & {
+      float: none;
+    }
+
+    .#{$namespace}#{$grid-wrap-class}--float & { // return to float after inline-block
+      float: left;
+    }
+  }
+
+  .#{$namespace}#{$grid-col-class},
+  [class*="#{$namespace}#{$grid-col-class}"] {
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative; // for push/pull
+  }
+
+  // inline-block alignment helpers
+  .#{$namespace}#{$grid-wrap-class}--inline--left { text-align: left; }
+  .#{$namespace}#{$grid-wrap-class}--inline--center { text-align: center; }
+  .#{$namespace}#{$grid-wrap-class}--inline--right { text-align: right; }
+
+  // inline-block alignment helpers
+  .#{$namespace}#{$grid-wrap-class}--flex--left { align-items: flex-start; }
+  .#{$namespace}#{$grid-wrap-class}--flex--center { justify-content: center; }
+  .#{$namespace}#{$grid-wrap-class}--flex--right { align-items: flex-end; }
+
+  // reset for list grids
+  ul.g-wrap,
+  ol.g-wrap {
+    padding: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+  li.g-col,
+  li[class*="g-col"] {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+}
+
+// create all grid classes for a given proportion
+// $class-name will be the class used in markup, $proportion is the fluid proportion
+@mixin grid-class-setup($class-name, $proportion, $gutter, $prefix: $namespace) {
+  $oldie-gutter: #{$gutter / 10px}#{"%"}; // Convert to % equivalent
+
+  // Column
+  .#{$prefix}#{$grid-col-class}-#{$class-name} {
+    width: $proportion;
+
+    .lt-ie8 & {
+      width: floor($proportion) - ($gutter / 10px); //- 0.25%; // Extra 0.25% fudge factor so that it doesn't add up to 100%
+      //@@TODO: Test removal of 0.25%;
+    }
+  }
+
+  // Offset
+  .#{$prefix}-offset-#{$class-name} {
+    margin-left: $proportion;
+
+    .lt-ie8 & {
+      margin-left: floor($proportion);
+    }
+  }
+
+  // Push/pull
+  .#{$prefix}-push-#{$class-name} {
+    left: $proportion;
+
+    .lt-ie8 & {
+      left: floor($proportion);
+    }
+  }
+
+  .#{$prefix}-pull-#{$class-name} {
+    left: -$proportion;
+
+    .lt-ie8 & {
+      left: -(floor($proportion));
+    }
+  }
+}
+
+// set the proportions you want to use
+// $namespace relates to the class prefix e.g. bp2-col to target breakpoint 2
+@mixin grid-setup($namespace,$gutter) {
+  @each $grid-column in $grid-columns {
+    @include grid-class-setup(nth($grid-column, 1), nth($grid-column, 2) * 100%, $gutter, $namespace);
+  }
+}
+
+// include grids-init to set up your grids with your base class
+// i.e. @include grids-init("col");
+@mixin grids-init($class:$grid-namespace,$gutter:$grid-gutter,$breakpoint:false) {
+
+  @if ($breakpoint) {
+    @media screen and (min-width: $breakpoint) {
+      @include grid-config($class,$gutter);
+      @include grid-setup($class,$gutter);
+    }
+  } @else {
+    @include grid-config($class,$gutter);
+    @include grid-setup($class,$gutter);
+  }
+}

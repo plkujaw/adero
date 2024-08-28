@@ -1,0 +1,152 @@
+.contact-careers {
+  padding-top: 60px;
+  position: relative;
+  a {
+    color: currentColor;
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+
+  .careers-dots {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30%;
+  }
+  .careers-inner {
+    max-width: 630px;
+  }
+  .careers-text {
+    * {
+      color: currentColor;
+    }
+    h2 {
+      @include fs-responsive($fs-h4);
+      margin-bottom: 40px;
+    }
+    p {
+      @include fs-responsive($fs-location-name);
+      // line-height: 156%;
+    }
+
+    a {
+      font-weight: 600;
+    }
+  }
+
+  .careers-vacancies {
+    padding-top: 60px;
+    .vacancy-wrapper {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .vacancy {
+      @include fs-responsive($fs-spotlight-questionnaire);
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 20px;
+      position: relative;
+      width: 100%;
+
+      svg {
+        display: inline-block;
+        margin-left: auto;
+        order: 2;
+        width: 12px;
+      }
+
+      span {
+        line-height: 162%;
+        position: relative;
+      }
+
+      .position-title {
+        font-weight: 600;
+        order: 1;
+      }
+
+      .position-location {
+        order: 3;
+        width: 100%;
+      }
+
+      &::after,
+      &::before {
+        bottom: 0px;
+        content: '';
+        height: 1px;
+        position: absolute;
+        transition: $default_transition;
+        width: 100%;
+      }
+
+      &::after {
+        background: $clr-btn-gradient;
+        opacity: 1;
+      }
+
+      &::before {
+        background: $clr-malachite-deep;
+        height: 2px;
+        opacity: 0;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        svg {
+          animation: animate-arrow-1 0.7s;
+        }
+
+        &::after {
+          opacity: 0;
+        }
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  @include respond-min($bp-tablet-min) {
+    .careers-vacancies {
+      .vacancy {
+        svg {
+          order: 3;
+        }
+
+        .position-title {
+          order: 1;
+          &::after {
+            content: ',';
+            padding-right: 0.25em;
+          }
+        }
+
+        .position-location {
+          color: $clr-gray;
+          order: 2;
+          width: unset;
+        }
+      }
+    }
+  }
+  @include respond-min($bp-tablet-wide-med-min) {
+    padding-bottom: 120px;
+    padding-top: 120px;
+    .careers-text {
+      h2 {
+        margin-bottom: 60px;
+      }
+    }
+    .careers-vacancies {
+      padding-top: 80px;
+    }
+  }
+}

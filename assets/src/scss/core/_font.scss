@@ -1,0 +1,82 @@
+/*
+  FONTS
+*/
+
+/*
+  FONTS
+*/
+$fontsDir: '../../fonts/';
+
+@font-face {
+  font-display: swap;
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: normal;
+  src: url(#{$fontsDir}Epilogue.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Steradian Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url(#{$fontsDir}SteradianRegular.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Steradian Light';
+  font-style: normal;
+  font-weight: normal;
+  src: url(#{$fontsDir}SteradianLight.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Steradian Extra Light';
+  font-style: normal;
+  font-weight: normal;
+  src: url(#{$fontsDir}SteradianExtraLight.woff2) format('woff2');
+}
+
+// @font-face {
+//   font-family: 'Steradian Ultra Light';
+//   font-style: normal;
+//   font-weight: normal;
+//   src: url(#{$fontsDir}/SteradianUltraLight.woff2) format('woff2');
+//     font-display: swap;
+// }
+
+@font-face {
+  font-display: swap;
+  font-family: 'Steradian Thin';
+  font-style: normal;
+  font-weight: normal;
+  src: url(#{$fontsDir}SteradianThin.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Steradian Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url(#{$fontsDir}SteradianBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Steradian Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url(#{$fontsDir}SteradianBold.woff2) format('woff2');
+}
+
+// Default font stacks
+$f-epilogue: 'Epilogue', sans-serif;
+$f-steradian-regular: 'Steradian Regular', sans-serif;
+$f-steradian-light: 'Steradian Light', sans-serif;
+$f-steradian-extra-light: 'Steradian Extra Light', sans-serif;
+// $f-steradian-ultra-light: 'Steradian Ultra Light', sans-serif;
+$f-steradian-thin: 'Steradian Thin', sans-serif;
+$f-steradian-bold: 'Steradian Bold', sans-serif;
+$f-steradian-medium: 'Steradian Medium', sans-serif;

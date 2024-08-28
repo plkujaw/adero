@@ -1,0 +1,43 @@
+.our-services--home {
+  background: $clr-btn-gradient;
+  &__title {
+    background-color: $clr-malachite-deep;
+    color: $clr-marigold;
+    font-family: $f-steradian-bold;
+    padding-bottom: 146px;
+    padding-top: 100px;
+    p {
+      @include fs-responsive($fs-p1);
+      letter-spacing: 0.15em;
+      margin: 0;
+    }
+  }
+
+  .home-info-cards__inner {
+    position: relative;
+    .info-cards__inner {
+      padding-bottom: 26px;
+    }
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    &__title {
+      padding-bottom: 176px;
+      padding-top: 0;
+    }
+    .home-info-cards__inner {
+      .info-cards__inner {
+        padding-bottom: 479px;
+      }
+    }
+  }
+
+  @include respond-min(100em) {
+    .info-cards__wrapper {
+      > .container {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+.work-info-cards {
+  background: $clr-btn-gradient;
+  margin-top: 40px;
+  position: relative;
+
+  &__cards {
+    margin-bottom: 40px;
+    transform: translateY(-40px);
+  }
+
+  &__dots {
+    bottom: 0;
+    height: 55%;
+    position: absolute;
+    right: 0;
+    width: 35%;
+  }
+  &__inner {
+    position: relative;
+  }
+
+  .info-card {
+    border-color: $clr-marigold;
+    padding: 0;
+    &::before {
+      content: unset;
+    }
+    &__heading {
+      align-items: center;
+      border: 1px solid;
+      border-color: inherit;
+      border-radius: inherit;
+      display: flex;
+      padding: 24px 28px;
+      transform: translate(-1px, -1px);
+      width: calc(100% + 2px);
+    }
+    &__number {
+      span {
+        @include fs-responsive($fs-work-card-number);
+        align-items: center;
+        background-color: $clr-marigold;
+        border-radius: 50%;
+        color: $clr-white;
+        display: flex;
+        font-family: $f-steradian-regular;
+        height: 1em;
+        justify-content: center;
+        margin-right: 0.75em;
+        padding: 0.85em;
+        width: 1em;
+      }
+    }
+    &__title {
+      flex: 1;
+      text-transform: uppercase;
+
+      h2 {
+        @include fs-responsive($fs-work-card-title);
+        font-weight: normal;
+        line-height: 130%;
+
+        span {
+          font-family: $f-steradian-regular;
+          letter-spacing: 0.16em;
+          &:first-child {
+            font-family: $f-steradian-bold;
+          }
+        }
+      }
+    }
+
+    &__copy {
+      padding: 40px 28px;
+
+      h3 {
+        @include fs-responsive($fs-work-card-subtitle);
+        color: $clr-malachite-deep;
+        font-family: $f-steradian-extra-light;
+        font-weight: normal;
+        line-height: 117%;
+        padding-bottom: 32px;
+      }
+    }
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    margin-top: 50px;
+
+    &__cards {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-row-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      margin-bottom: 0;
+      padding-bottom: 626px;
+      transform: translateY(-50px);
+    }
+
+    .info-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      margin: 0;
+      width: auto;
+
+      &__title {
+        br {
+          display: none;
+        }
+      }
+
+      &__heading,
+      &__copy {
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+
+      &__heading {
+        padding-bottom: 26px;
+        padding-top: 26px;
+      }
+      &__copy {
+        padding-bottom: 60px;
+        padding-top: 60px;
+      }
+      &:nth-of-type(4) {
+        img {
+          height: 87% !important;
+        }
+      }
+    }
+  }
+  @include respond-min(100em) {
+    &__inner {
+      > .container {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}

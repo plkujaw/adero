@@ -1,0 +1,320 @@
+@import 'core/breakpoints';
+@import 'core/animations';
+
+/*
+  HELPERS
+  Helper functions(), @mixins, %placeholders and .classes
+*/
+
+// Unit stripper
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+// Convert pixels to rem, based on base font
+@function calculate-rem($size, $base-font-size: 16) {
+  $remSize: $size / strip-unit($base-font-size);
+  @return #{$remSize};
+}
+
+// Percentage calculator
+@function percent($size, $container: $w-max) {
+  @return ($size / $container) * 100%;
+}
+
+// MIXINS
+
+// Border setter
+@mixin border($border-widths, $border-color, $border-style: solid) {
+  border-width: $border-widths;
+  border-style: $border-style;
+  border-color: $border-color;
+}
+
+// Placeholder styling
+@mixin placeholder {
+  &.placeholder {
+    @content;
+  } // For use with polyfill e.g. https://github.com/mathiasbynens/jquery-placeholder
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  } // Older Firefox
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+// HELPERS
+// Use @extend %helper-class for leaner CSS
+
+// Float clearing
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// Visibility
+@mixin hidden {
+  display: none !important;
+  visibility: hidden;
+}
+%hidden {
+  @include hidden;
+}
+
+// visuallyhidden and visuallyshown are javascript safe ways of hiding – avoid using jquery hide() and show() as bad, bad, bad!
+@mixin visuallyhidden($focus: false) {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  // Allow focus
+  @if $focus {
+    &:active,
+    &:focus {
+      clip: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      position: static;
+      width: auto;
+    }
+  }
+}
+%visuallyhidden {
+  @include visuallyhidden;
+}
+%visuallyhiddenfocus {
+  @include visuallyhidden($focus: 'focus');
+}
+
+@mixin visuallyshown {
+  clip: auto;
+  // clip: rect(auto auto auto auto);
+  position: static;
+  overflow: visible;
+  margin: 0;
+  width: auto;
+  height: auto;
+}
+%visuallyshown {
+  @include visuallyshown;
+}
+
+@mixin invisible {
+  visibility: hidden;
+}
+%invisible {
+  @include invisible;
+}
+
+@mixin hide-nojs($except-first: false) {
+  .no-js & {
+    display: none;
+    @if $except-first {
+      &:first-child {
+        display: block;
+      }
+    }
+  }
+}
+%hide-nojs {
+  @include hide-nojs;
+}
+%hide-nojs--except-first {
+  @include hide-nojs($except-first: true);
+}
+
+@mixin hide-text() {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+// include units
+@mixin image-replacement($width, $height) {
+  display: block;
+  overflow: hidden;
+  height: 0;
+  width: #{$width};
+  padding-top: #{$height};
+  background-repeat: no-repeat;
+}
+
+%image-replacement {
+  @include image-replacement(0, 0);
+}
+
+// overrides default hyperlink colour and underline for when building buttons etc out of links
+%clean-hyperlink {
+  text-decoration: none;
+  color: inherit;
+}
+
+// default mixin for pseudo elements such as complex blocks built using before or after
+@mixin pseudo($width, $height) {
+  content: '';
+  display: block;
+  width: $width;
+  height: $height;
+}
+
+// Z-INDEX
+$z-index: (
+  hell: -9999,
+  to-back: -100,
+  backwards: -10,
+  base-back: -2,
+  base-behind: -1,
+  base: 0,
+  content-lower: 10,
+  content-mid: 20,
+  content-top: 30,
+  chrome-lower: 100,
+  chrome-mid: 200,
+  chrome-top: 300,
+  modal-bottom: 1000,
+  modal-mid: 2000,
+  modal-top: 3000,
+  heaven: 9999
+);
+
+@mixin z-index($level) {
+  @if map-has-key($z-index, $level) {
+    z-index: map-get($z-index, $level);
+  } @else {
+    @warn "Unknown '#{$level}' in map $lh.";
+  }
+}
+
+// @@TIP: webkit-font-boost: light fonts are a bit light on webkit at smaller sizes
+// namely Lato regular which is too fat, and the thin is too thin, this beefs up thin just enough...
+// placeholder is just to isolate this pretty invasive bit of css for possible removal
+
+// use mixin if needing to toggle on and off
+@mixin webkit-font-boost {
+  -webkit-text-stroke: 0.55px;
+}
+@mixin webkit-font-boost--reset {
+  -webkit-text-stroke: 0;
+}
+
+// some web fonts when white on dark bg, are a bit strong, reduce
+@mixin webkit-font-reduce {
+  -webkit-font-smoothing: antialiased;
+}
+
+// embedded-content is a placeholder for iframe content such as youtube vids, google maps, issuu publications etc – makes them responsive!
+%embedded-content {
+  position: relative;
+  padding-bottom: 56.25%;
+  // padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+
+  iframe,
+  object,
+  embed {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+// generics – some little helper classes with no home just to apply some arbitrary styles
+.padding-1 {
+  padding: 1em;
+}
+.padding-2 {
+  padding: 2em;
+}
+.push-right {
+  float: right;
+}
+.push-left {
+  float: left;
+}
+
+// Ugly, but rarely used
+.no-link {
+  color: inherit !important;
+  background-color: transparent !important;
+  border: 0 !important;
+}
+
+@mixin list-reset() {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@mixin list-item-reset() {
+  padding: 0;
+  margin: 0;
+  // line-height: 100%;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.fade {
+  opacity: 0;
+  transition: all 0.35s ease-in;
+
+  .js--loaded & {
+    opacity: 1;
+  }
+}
+
+@mixin uppercase {
+  text-transform: uppercase;
+  letter-spacing: $ls-med-wide;
+  font-weight: $fw-bold;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+// Nicer bezier animation
+$default-bezier: cubic-bezier(0.37, -0.21, 0.19, 1.24);
+
+$default-border-radius: 24px;
+$reduced-border-radius: 4px;
+
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px,1px,1px,1px);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal!important;
+}

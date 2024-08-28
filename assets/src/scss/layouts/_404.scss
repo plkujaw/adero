@@ -1,0 +1,44 @@
+.page-404 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  text-align: center;
+  margin-bottom: 188px;
+  * {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    @include fs-responsive($fs-error404);
+    color: $clr-malachite-light;
+    line-height: 100%;
+
+    &::after {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        #ffffff 59.37%,
+        #ffffff 100%
+      );
+      bottom: -40%;
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      width: 100%;
+      z-index: 0;
+    }
+  }
+  h2 {
+    @include fs-static(32);
+    margin-bottom: 12px;
+  }
+  a {
+    margin-top: 40px;
+  }
+  @include respond-min($bp-tablet-wide-med-min) {
+    margin-top: 36px;
+  }
+}

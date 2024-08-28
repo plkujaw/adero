@@ -1,0 +1,119 @@
+.info-card {
+  background-color: $clr-white;
+  border: 1px solid $clr-white;
+  border-radius: $default-border-radius;
+  height: fit-content;
+  margin-bottom: 16px;
+  padding: 32px 28px 40px;
+  position: relative;
+  &:first-of-type,
+  &:last-of-type {
+    &::before {
+      border: 1px solid $clr-white;
+      content: '';
+      display: block;
+      height: 92px;
+      left: -1px;
+      position: absolute;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+
+  &:first-of-type {
+    &::before {
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      top: -24px;
+    }
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+    &::before {
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      bottom: -24px;
+    }
+  }
+  &__icon {
+    height: 32px;
+    margin-left: auto;
+    width: auto;
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  &__title {
+    h3 {
+      margin-bottom: 36px;
+      @include respond-min($bp-tablet-wide-med-min) {
+        margin-bottom: 44px;
+      }
+    }
+  }
+  &__copy {
+    p {
+      @include fs-responsive($fs-work-card-title);
+      color: $clr-gray;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  &__additional-information {
+    ul {
+      @include list-reset;
+      padding-top: 26px;
+      li {
+        @include fs-responsive($fs-work-card-title);
+        padding-top: 10px;
+        position: relative;
+        &::after {
+          background: $clr-btn-gradient;
+          content: '';
+          display: block;
+          height: 1px;
+          margin-top: 10px;
+          width: 100%;
+        }
+      }
+    }
+  }
+  @include respond-min($bp-tablet-wide-med-min) {
+    margin-bottom: 0;
+    margin-right: 21px;
+    padding: 40px 40px 52px;
+    width: calc(100% / 3);
+    &:first-of-type {
+      &::before {
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+        top: -24px;
+        width: calc(200% + 23px);
+      }
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &__icon {
+      height: 40px;
+    }
+
+    &__additional-information {
+      ul {
+        padding-top: 95px;
+        // li {
+        //   padding-top: 11px;
+        //   &::after {
+        //     margin-top: 11px;
+        //   }
+        // }
+      }
+    }
+  }
+}

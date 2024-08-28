@@ -1,0 +1,54 @@
+.resources {
+  background-color: $clr-malachite-light;
+  position: relative;
+
+  &__inner {
+    position: relative;
+    > .container {
+      padding-bottom: 60px;
+      padding-right: 0;
+      padding-top: 60px;
+    }
+  }
+
+  &__title {
+    padding-bottom: 60px;
+    h2 {
+      @include fs-responsive($fs-h4);
+      font-family: $f-steradian-medium;
+    }
+  }
+
+  &__dots {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    &__inner {
+      > .container {
+        padding-bottom: 220px;
+        padding-top: 120px;
+      }
+    }
+
+    &__title {
+      padding-bottom: 85px;
+    }
+  
+    &__dots {
+      width: 40%;
+    }
+  }
+
+  @include respond-min(100em) {
+    &__inner {
+      > .container {
+        padding-left: 0;
+      }
+    }
+  }
+}

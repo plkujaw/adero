@@ -1,0 +1,172 @@
+/*
+  FORMS
+*/
+.form {
+  &__wrapper {
+    padding-top: 60px;
+  }
+
+  .wpcf7-form-control-wrap {
+    margin: 0 0.2em;
+    position: relative;
+  }
+
+  &__fields {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    width: 100%;
+    input,
+    textarea,
+    select {
+      @include fs-static(16);
+      border: 1px solid rgba($clr-malachite-deep, 0.15);
+      border-radius: $reduced-border-radius;
+      color: $clr-gray;
+      font-family: $f-epilogue;
+      font-weight: 300;
+      outline: none;
+      padding: 19px 20px 15px;
+      resize: none;
+      transition: $default_transition;
+      width: 100%;
+
+      &:focus {
+        border-color: $clr-malachite-deep;
+      }
+      &::-webkit-input-placeholder {
+        color: $clr-gray;
+        /* Chrome/Opera/Safari */
+        opacity: 1;
+      }
+      &::-moz-placeholder {
+        color: $clr-gray;
+        /* Firefox 19+ */
+        opacity: 1;
+      }
+      &:-ms-input-placeholder {
+        color: $clr-gray;
+        /* IE 10+ */
+        opacity: 1;
+      }
+      &:-moz-placeholder {
+        color: $clr-gray;
+        /* Firefox 18- */
+        opacity: 1;
+      }
+    }
+    textarea {
+      height: 200px;
+    }
+
+    select {
+      appearance: none;
+      background: transparent;
+      background-image: url("data:image/svg+xml;utf8,<svg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 1L6.5 7L12 1' stroke='%23022d2c' stroke-width='1.5'/></svg>");
+      background-position: right 20px top 50%;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      outline: none;
+    }
+
+    label {
+      @include fs-static(16);
+      background-color: $clr-white;
+      font-family: $f-steradian-medium;
+      margin-left: 12px;
+      padding: 0 8px;
+      position: relative;
+      transform: translateY(50%);
+      width: fit-content;
+      z-index: 2;
+    }
+
+    &:first-child {
+      order: 1;
+    }
+    &:nth-child(2) {
+      order: 2;
+    }
+    &:nth-child(3) {
+      order: 3;
+    }
+    &:nth-child(4) {
+      order: 5;
+    }
+
+    &:nth-child(5) {
+      order: 4;
+    }
+
+    &:last-child {
+      margin-bottom: 12px;
+      order: 6;
+    }
+  }
+
+  &__info {
+    margin-bottom: 24px;
+    p {
+      @include fs-static(13);
+      font-family: $f-steradian-light;
+      text-align: left;
+    }
+  }
+
+  .wpcf7-not-valid-tip {
+    @include fs-static(11);
+    color: $clr-malachite-deep;
+    padding-left: 20px;
+  }
+
+  .wpcf7-response-output {
+    @include fs-static(11);
+    border: none !important;
+    margin: 0 !important;
+    padding: 1em 0 0 !important;
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    &__wrapper {
+      padding-left: 20px;
+      padding-top: 110px;
+    }
+
+    &__field {
+      margin-bottom: 24px;
+      &--reduced {
+        width: calc(50% - 9px);
+      }
+      &:nth-of-type(1),
+      &:nth-of-type(4) {
+        margin-right: 18px;
+      }
+      &:nth-child(4) {
+        order: 4;
+      }
+      &:nth-child(5) {
+        order: 5;
+      }
+    }
+
+    &__info {
+      margin-bottom: 0;
+      p {
+        text-align: right;
+      }
+    }
+    &__submit {
+      transform: translateY(-10px);
+      width: fit-content;
+      svg {
+        width: 28px !important;
+      }
+    }
+  }
+}

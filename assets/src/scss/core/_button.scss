@@ -1,0 +1,140 @@
+/*
+  BUTTONS
+*/
+.btn,
+.facetwp-load-more {
+  @include fs-responsive($fs-p1);
+  align-items: center;
+  border: 1px solid;
+  border-color: $clr-malachite-deep;
+  border-radius: $default-border-radius;
+  color: $clr-malachite-deep;
+  cursor: pointer;
+  display: flex;
+  font-family: $f-steradian-regular;
+  letter-spacing: 0.02em;
+  min-height: 48px;
+  padding: 8px 24px;
+  position: relative;
+  transition: $default_transition;
+  white-space: nowrap;
+  width: fit-content;
+  svg,
+  svg * {
+    fill: $clr-malachite-deep;
+    transition: $default_transition;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $clr-malachite-deep;
+    color: $clr-pearl;
+    svg * {
+      fill: $clr-pearl;
+    }
+  }
+
+  &--gradient {
+    background: linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(95.12deg, #f6921e, #f26f21) border-box;
+    border: 1px solid transparent;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $clr-white;
+      border-color: $clr-malachite-deep;
+      color: $clr-malachite-deep;
+      svg * {
+        fill: $clr-malachite-deep;
+      }
+    }
+  }
+
+  &--dark {
+    background-color: $clr-malachite-deep;
+    border-color: $clr-pearl;
+    color: $clr-pearl;
+    svg * {
+      fill: $clr-pearl;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $clr-white;
+      border-color: $clr-malachite-deep;
+      color: $clr-malachite-deep;
+      svg * {
+        fill: $clr-malachite-deep;
+      }
+    }
+  }
+
+  &--gray {
+    background-color: $clr-malachite-light;
+  }
+
+  &--arrow-1 {
+    font-family: $f-epilogue;
+    font-weight: 600;
+    padding: 4px 18px 1px 18px !important;
+    svg {
+      margin-left: 1em;
+      width: 10px;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      svg {
+        animation: animate-arrow-1 0.7s;
+      }
+    }
+  }
+  &--arrow-2 {
+    font-family: $f-steradian-medium;
+    svg {
+      margin-right: 1em;
+      width: 28px;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      svg {
+        animation: animate-arrow-2 0.7s;
+      }
+    }
+  }
+
+  &--arrow-3 {
+    font-family: $f-steradian-medium;
+
+    svg {
+      margin-left: 1em;
+      width: 28px;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      svg {
+        animation: animate-arrow-3 0.7s;
+      }
+    }
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    padding: 3px 18px;
+    &--arrow-1 {
+      max-height: 30px;
+      min-height: fit-content;
+    }
+    &--arrow-2 {
+      padding: 10px 18px;
+    }
+    &--desktop-sm {
+      @include fs-responsive($fs-p2);
+    }
+  }
+}

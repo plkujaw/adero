@@ -1,0 +1,71 @@
+@import 'core/colour';
+
+/*
+  LAYOUT & PAGE LEVEL STUFF
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+  position: relative;
+}
+
+body {
+  overflow-x: hidden;
+  // max-width: 1920px;
+  // margin: 0 auto;
+}
+
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $site-width;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+
+  @include respond-min($bp-tablet-wide-min) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  @include respond-min($bp-desktop-min) {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  &--full {
+    padding: 0;
+    @include respond-min(100em) {
+      padding: 0 80px;
+    }
+  }
+}
+
+.hidden-desktop {
+  display: block;
+  @include respond-min($bp-tablet-wide-med-min) {
+    display: none;
+  }
+}
+
+.hidden-mobile {
+  display: none;
+  @include respond-min($bp-tablet-wide-med-min) {
+    display: block;
+  }
+}

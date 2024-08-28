@@ -1,0 +1,131 @@
+.team-members {
+  padding-bottom: 60px;
+
+  &__load-more {
+    button {
+      background-color: $clr-white;
+      font-family: $f-steradian-medium;
+      margin: 40px auto 0 auto;
+    }
+    .facetwp-facet {
+      margin: 0;
+    }
+  }
+
+  &__join {
+    .btn {
+      border: none;
+      margin: 40px auto 0;
+      max-width: 400px;
+      width: 100%;
+      svg {
+        margin-left: auto;
+      }
+    }
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    padding-bottom: 100px;
+    &__load-more {
+      button {
+        margin: 100px auto 0 auto;
+      }
+    }
+  }
+}
+
+.archive-person {
+  .team-members__title {
+    padding: 60px 0;
+    h2 {
+      @include fs-responsive($fs-h4);
+    }
+    a {
+      display: none !important;
+    }
+  }
+
+  .team-members__selections {
+    @include fs-responsive($fs-team-members-filter-selections);
+    font-family: $f-steradian-bold;
+    position: relative;
+    text-transform: uppercase;
+    span {
+      border-bottom: 1px solid $clr-malachite-deep;
+      display: block;
+      margin-bottom: 40px;
+      padding-bottom: 10px;
+      position: relative;
+    }
+  }
+
+  .team-members__list {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    position: relative;
+
+    // .team-member-card-wrapper {
+    //   &:nth-of-type(n + 5) {
+    //     display: none;
+    //   }
+    // }
+  }
+
+  .no-results {
+    @include fs-responsive($fs-p1);
+  }
+
+  @include respond-min($bp-tablet-wide-med-min) {
+    .team-members__title {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding: 135px 0 80px;
+      h2 {
+        @include fs-responsive($fs-h4);
+        margin-bottom: 0;
+      }
+      a {
+        display: flex !important;
+      }
+    }
+
+    .team-members__selections {
+      span {
+        border-bottom: 0;
+        letter-spacing: 0.15em;
+        margin-bottom: 80px;
+        margin-top: 40px;
+        overflow: hidden;
+        padding: 0;
+        &::after {
+          background-color: $clr-malachite-deep;
+          content: '';
+          display: inline-block;
+          height: 1px;
+          margin-left: 20px;
+          position: absolute;
+          // right: 0;
+          top: 50%;
+          width: 100%;
+        }
+      }
+    }
+
+    .team-members__list {
+      grid-column-gap: 34px;
+      grid-row-gap: 32px;
+      grid-template-columns: repeat(3, 1fr);
+      // .team-member-card-wrapper {
+      //   &:nth-of-type(n + 5) {
+      //     display: block;
+      //   }
+      //   &:nth-of-type(n + 10) {
+      //     display: none;
+      //   }
+      // }
+    }
+  }
+}
